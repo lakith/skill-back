@@ -33,4 +33,8 @@ okta:
     clientId: 0oaocww3nHiMX0Ixl356
     clientSecret: 4q6_Aw0keav6atCn1t5ODbL9UV8pbR7nzHw-ZcSs
     redirect-uri: /authorization-code/callback
-    
+
+management:
+  endpoints:
+    web:
+      base-path: /actuvator
