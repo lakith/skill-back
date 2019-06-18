@@ -1,0 +1,28 @@
+
+
+
+                ${Ansi.BLUE}                        WWWWWWWW                           WWWWWWWW  iiii  lllllll
+                ${Ansi.BLUE}                        W::::::W                           W::::::W i::::i l:::::l
+                ${Ansi.BLUE}                        W::::::W                           W::::::W  iiii  l:::::l
+                ${Ansi.BLUE}                        W::::::W                           W::::::W        l:::::l
+                ${Ansi.BLUE}                         W:::::W           WWWWW           W:::::W iiiiiii  l::::l     eeeeeeeeeeee    yyyyyyy           yyyyyyy
+                ${Ansi.BLUE}                          W:::::W         W:::::W         W:::::W  i:::::i  l::::l   ee::::::::::::ee   y:::::y         y:::::y
+                ${Ansi.BLUE}                           W:::::W       W:::::::W       W:::::W    i::::i  l::::l  e::::::eeeee:::::ee  y:::::y       y:::::y
+                ${Ansi.BLUE}                            W:::::W     W:::::::::W     W:::::W     i::::i  l::::l e::::::e     e:::::e   y:::::y     y:::::y
+                ${Ansi.BLUE}                             W:::::W   W:::::W:::::W   W:::::W      i::::i  l::::l e:::::::eeeee::::::e    y:::::y   y:::::y
+                ${Ansi.BLUE}                              W:::::W W:::::W W:::::W W:::::W       i::::i  l::::l e:::::::::::::::::e      y:::::y y:::::y
+                ${Ansi.BLUE}                               W:::::W:::::W   W:::::W:::::W        i::::i  l::::l e::::::eeeeeeeeeee        y:::::y:::::y
+                ${Ansi.BLUE}                                W:::::::::W     W:::::::::W         i::::i  l::::l e:::::::e                  y:::::::::y
+                ${Ansi.BLUE}                                 W:::::::W       W:::::::W         i::::::il::::::le::::::::e                  y:::::::y
+                ${Ansi.BLUE}                                  W:::::W         W:::::W          i::::::il::::::l e::::::::eeeeeeee           y:::::y
+                ${Ansi.BLUE}                                   W:::W           W:::W           i::::::il::::::l  ee:::::::::::::e          y:::::y
+                ${Ansi.BLUE}                                    WWW             WWW            iiiiiiiillllllll    eeeeeeeeeeeeee         y:::::y
+                ${Ansi.BLUE}                                                                                                             y:::::y
+                ${Ansi.BLUE}                                                                                                            y:::::y
+                ${Ansi.BLUE}                                                                                                           y:::::y
+                ${Ansi.BLUE}                                                                                                          y:::::y
+                ${Ansi.BLUE}                                                                                                         yyyyyyy
+${Ansi.RED} :: Spring Boot${spring-boot.formatted-version} :: ${Ansi.DEFAULT}
+
+
+

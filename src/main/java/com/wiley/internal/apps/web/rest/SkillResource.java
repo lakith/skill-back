@@ -37,8 +37,8 @@ public class SkillResource {
 	}
 
 	@PostMapping("/v1/skills")
-	public ResponseEntity<Skill> handleSkillCreateAndUpdate(@Valid @RequestBody Skill skill) {
-		return new ResponseEntity<>(this.skillService.createSkill(skill), HttpStatus.CREATED);
+	public ResponseEntity<?> handleSkillCreateAndUpdate(@Valid @RequestBody Skill skill) {
+		return this.skillService.createSkill(skill);
 	}
 	
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -88,12 +88,27 @@ public class SkillResource {
 				if (params[0].equals("skillLevelId")) {
 					userSkill.setSkillLevelId(Long.parseLong(params[1]));
 				}
-
 			}
 			usersSkills.add(userSkill);
 		}
-
 		return this.userSkillService.filterUsersForSkills(usersSkills);
+	}
+
+	/***
+	 * @ author - Lakith Muthugala.
+	 * @ version - 1.0
+	 * @ since - 2019-06-14
+	 * @ Work - Status endpoint.
+	 ***/
+
+	@GetMapping("/v1/skills/get-status")
+	public ResponseEntity getSkillStatusData() {
+		return skillService.getSkillsWithDevolopers();
+	}
+
+	@GetMapping("/v1/skills/get-skill-levels")
+	public ResponseEntity getAllSkillLevels() {
+		return skillService.getAllSkillLevels();
 	}
 
 }

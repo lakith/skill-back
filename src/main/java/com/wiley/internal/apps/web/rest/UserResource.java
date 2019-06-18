@@ -58,4 +58,9 @@ public class UserResource {
 		return new ResponseEntity<>(this.userSkillService.createSkillForUser(userSkill), HttpStatus.CREATED);
 	}
 
+	@GetMapping("/v1/users/get-all-users")
+	public ResponseEntity<?> getAllUsers(){
+		return userService.getAllUserDetails();
+	}
+
 }

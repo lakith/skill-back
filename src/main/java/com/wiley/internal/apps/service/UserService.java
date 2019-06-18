@@ -3,6 +3,7 @@ package com.wiley.internal.apps.service;
 import java.util.List;
 
 import com.wiley.internal.apps.domain.User;
+import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
@@ -15,4 +16,6 @@ public interface UserService {
 	User findUser(String userName);
 	
 	List<User> findByUserNameIgnoreCaseContaining(String userName);
+
+	ResponseEntity<?> getAllUserDetails ();
 }
