@@ -30,6 +30,9 @@ public class UserSkill {
 	@Column(name = "EXPERIENCE")
 	private Float experience;
 
+	@Column(name = "STARRATE")
+	private int starRate = 0;
+
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "SKILL_LEVEL_ID")
@@ -55,6 +58,14 @@ public class UserSkill {
     
 	public Long getId() {
 		return id;
+	}
+
+	public int getStarRate() {
+		return starRate;
+	}
+
+	public void setStarRate(int starRate) {
+		this.starRate = starRate;
 	}
 
 	public void setId(Long id) {

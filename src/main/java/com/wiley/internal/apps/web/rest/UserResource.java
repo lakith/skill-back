@@ -2,6 +2,7 @@ package com.wiley.internal.apps.web.rest;
 
 import java.util.List;
 
+import com.wiley.internal.apps.dto.UserSkillSaveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,11 @@ public class UserResource {
 	@GetMapping("/v1/users/get-all-users")
 	public ResponseEntity<?> getAllUsers(){
 		return userService.getAllUserDetails();
+	}
+
+	@PostMapping("v1/user/skill")
+	public ResponseEntity<?> saveSkillsOfUser(@RequestBody UserSkillSaveDTO userSkillSaveDTO) {
+		return userService.saveUserSkills(userSkillSaveDTO);
 	}
 
 }

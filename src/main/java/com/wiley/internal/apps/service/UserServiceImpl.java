@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.wiley.internal.apps.domain.Skill;
+import com.wiley.internal.apps.domain.SkillLevel;
 import com.wiley.internal.apps.domain.UserSkill;
-import com.wiley.internal.apps.dto.UserSearchDTO;
-import com.wiley.internal.apps.dto.UserSkillDTO;
+import com.wiley.internal.apps.dto.*;
+import com.wiley.internal.apps.repo.SkillLevelRepository;
+import com.wiley.internal.apps.repo.SkillRepository;
 import com.wiley.internal.apps.repo.UserSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,10 +27,16 @@ public class UserServiceImpl implements UserService {
 
 	private UserSkillRepository  userSkillRepository;
 
+	private SkillLevelRepository skillLevelRepository;
+
+	private SkillRepository skillRepository;
+
 	@Autowired
-	public UserServiceImpl(final UserRepository userRepository, final  UserSkillRepository userSkillRepository) {
+	public UserServiceImpl(final UserRepository userRepository, final  UserSkillRepository userSkillRepository, final  SkillLevelRepository skillLevelRepository, final SkillRepository skillRepository) {
 		this.userRepository = userRepository;
 		this.userSkillRepository = userSkillRepository;
+		this.skillLevelRepository = skillLevelRepository;
+		this.skillRepository = skillRepository;
 	}
 
 	@Override
@@ -59,7 +68,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findByUserNameIgnoreCaseContaining(String userName) {
-		// TODO Auto-generated method stub
 		return userRepository.findByUserNameIgnoreCaseContaining(userName);
 	}
 
@@ -90,7 +98,7 @@ public class UserServiceImpl implements UserService {
 						userSkillDTO.setSkillname(userSkill.getSkill().getName());
 						userSkillDTO.setSkillDescription(userSkill.getSkillLevel().getDescription());
 						userSkillDTO.setSkillValue(userSkill.getSkillLevel().getValue());
-						userSkillDTO.setSkillValue(userSkill.getSkillLevel().getValue());
+						userSkillDTO.setSkillValue(userSkill.getStarRate());
 						userSkillDTO.setExperiace(userSkill.getExperience());
 
 						userSkillDTOList.add(userSkillDTO);
@@ -101,6 +109,48 @@ public class UserServiceImpl implements UserService {
 				}
 			}
 			return new ResponseEntity<>(userSearchDTOList,HttpStatus.OK);
+		}
+	}
+
+	@Override
+	public ResponseEntity<?> saveUserSkills(UserSkillSaveDTO userSkillSaveDTO) {
+		Optional<User> optionalUser = userRepository.findById(userSkillSaveDTO.getUsername());
+
+		if(!optionalUser.isPresent()){
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} else {
+			for(SkillDTO skillDTO : userSkillSaveDTO.getSkillDTOList()){
+				Optional<SkillLevel> optionalSkillLevel = skillLevelRepository.findById(skillDTO.getSkillLevelId());
+				if(!optionalSkillLevel.isPresent()){
+					ResponseDTO responseDTO = new ResponseDTO();
+					responseDTO.setMessage("Invalid Data Present - Roll Back");
+					responseDTO.setStatus(false);
+					return new ResponseEntity<>(responseDTO,HttpStatus.BAD_REQUEST);
+				}
+				Optional<Skill> optionalSkill = skillRepository.findById(skillDTO.getSkillId());
+				if(!optionalSkill.isPresent()){
+					ResponseDTO responseDTO = new ResponseDTO();
+					responseDTO.setMessage("Invalid Data Present - Roll Back");
+					responseDTO.setStatus(false);
+					return new ResponseEntity<>(responseDTO,HttpStatus.BAD_REQUEST);
+				}
+
+				UserSkill userSkill = new UserSkill();
+				userSkill.setUser(optionalUser.get());
+				userSkill.setSkill(optionalSkill.get());
+				userSkill.setSkillLevel(optionalSkillLevel.get());
+				userSkill.setExperience((float) skillDTO.getExperiace());
+				userSkill.setStarRate(skillDTO.getStarRate());
+
+				userSkillRepository.save(userSkill);
+			}
+
+			ResponseDTO responseDTO = new ResponseDTO();
+			responseDTO.setMessage("Skills Saved Successfully");
+			responseDTO.setStatus(true);
+
+			return new ResponseEntity<>(responseDTO,HttpStatus.CREATED);
+
 		}
 	}
 
